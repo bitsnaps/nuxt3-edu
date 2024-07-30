@@ -2,11 +2,11 @@
     <div class="pt-[80px]">
         <n-result
             status="500"
-            title="错误提示"
+            title="Error message"
             :description="error.message"
         >
             <template #footer>
-            <n-button @click="handleError">回到首页</n-button>
+            <n-button @click="handleError">Back to the Home</n-button>
             </template>
         </n-result>
     </div>

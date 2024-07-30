@@ -15,7 +15,7 @@
                 <div class=" bg-yellow-500 text-white p-3 text-xs flex items-center rounded-b">
                     {{ item.group_id ? 'In group' : 'Flash sale' }}
                     <div class="ml-auto flex items-center">
-                        倒计时
+                        Countdown
                         <CountDown :time="item.end_time"/>
                     </div>
                 </div>

@@ -4,15 +4,15 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      titleTemplate: "%s - 固定标题",
-      title: "帝莎编程",
+      titleTemplate: "%s - Fixed title",
+      title: "Disha Programming",
       charset: "utf-8",
       htmlAttrs: {
-        lang: "zh-cn",
+        lang: "en-US",
       },
       meta: [
-        { name: "description", content: "帝莎编程描述" },
-        { name: "keywords", content: "帝莎编程关键词" },
+        { name: "description", content: "Description of Disha Programming" },
+        { name: "keywords", content: "Disa Programming Keywords" },
       ],
       script: [
         // { src:"http://xxx.js" }
@@ -49,9 +49,9 @@ export default defineNuxtConfig({
     dirs: ["apis"],
   },
   nitro: {
-    // 缩小捆绑包
+    // Minify the bundle
     minify: true,
-    // 关闭源映射生成
+    // Turn off source map generation
     sourceMap: false,
   },
 });
