@@ -1,8 +1,8 @@
 <template>
     <UiCard>
         <UiCardHeader class="flex justify-between">
-            <span>订单时间：{{ item.created_time }}</span>
-            <span>订单号：{{ item.no }}</span>
+            <span>Order time:{{ item.created_time }}</span>
+            <span>Order No.:{{ item.no }}</span>
         </UiCardHeader>
         <UiCardBody>{{ item.goods }}</UiCardBody>
         <UiCardFooter class="flex justify-start">
@@ -12,7 +12,7 @@
                 {{ s[item.status] }}
             </span>
             <n-button type="primary" size="small" class="ml-3" v-if="item.status === 'pendding'" @click="pay">
-                立即支付
+                Pay now
             </n-button>
         </UiCardFooter>
     </UiCard>
@@ -26,15 +26,15 @@ const props = defineProps({
 })
 
 const s = {
-    closed:"已关闭",
-    success:"支付成功",
-    pendding:"等待支付",
-    grouping:"拼团中"
+    closed:"closed",
+    success:"Successful payment",
+    pendding:"Waiting for payment",
+    grouping:"In group"
 }
 
 const t = {
-    group:"拼团",
-    flashsale:"秒杀"
+    group:"Group Buying",
+    flashsale:"Flash Sale"
 }
 
 const pay = ()=>{

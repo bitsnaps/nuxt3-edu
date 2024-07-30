@@ -1,9 +1,9 @@
 <template>
     <n-card class="coupon" :class="{ 'coupon-disabled': isgetcoupon }">
         <h4>￥{{ item.price }}</h4>
-        <p>适用{{ o[item.type] }}：{{ item.value.title }}</p>
+        <p>Applicable {{ o[item.type] }}：{{ item.value.title }}</p>
         <p class="!text-xs mt-3">
-            有效期：
+            Validity period:
             <n-time :time="new Date(item.start_time)"/>
             ~
             <n-time :time="new Date(item.end_time)"/>
@@ -16,7 +16,7 @@
                 :disabled="isgetcoupon"
                 :loading="loading"
                 @click="submit">
-                    {{ isgetcoupon ? "已领取" : "立即领取" }}
+                    {{ isgetcoupon ? "Received" : "Get it now" }}
                 </n-button>
             </div>
         </template>
@@ -31,8 +31,8 @@ import {
 } from "naive-ui"
 
 const o = {
-    course:"课程",
-    column:"专栏"
+    course:"Course",
+    column:"Column"
 }
 
 const props = defineProps({
@@ -45,7 +45,7 @@ const loading = ref(false)
 const submit = ()=>{
     const { message } = createDiscreteApi(["message"])
     if(isgetcoupon.value){
-        return message.error("你已经领取过了")
+        return message.error("You have already received")
     }
     useHasAuth(async ()=>{
         loading.value = true
@@ -60,7 +60,7 @@ const submit = ()=>{
 
         if(error.value) return
 
-        message.success("领取成功")
+        message.success("Successfully received")
 
         isgetcoupon.value = true
 

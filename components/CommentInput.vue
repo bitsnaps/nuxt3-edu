@@ -6,14 +6,14 @@
                     <n-input
                         v-model:value="form.content"
                         type="textarea"
-                        placeholder="说两句吧~"
+                        placeholder="Say a few words~"
                     />
                 </n-form-item>
                 <n-form-item>
                     <div class="flex justify-end w-full">
                         <n-button type="primary" size="small" @click="submit" :loading="loading">回复</n-button>
 
-                        <n-button v-if="showCancel" size="small" class="ml-2" @click="emit('cancel')">取消</n-button>
+                        <n-button v-if="showCancel" size="small" class="ml-2" @click="emit('cancel')">Cancel</n-button>
                     </div>
                 </n-form-item>
             </n-form>
@@ -50,7 +50,7 @@
     const rules = {
         content:[{
             required:true,
-            message:"评论内容必填"
+            message:"Comment content is required"
         }]
     }
 
@@ -63,7 +63,7 @@
                 loading.value = true
 
                 let d = {
-                    "post_id": parseInt(props.post_id), //帖子ID
+                    "post_id": parseInt(props.post_id), //Post ID
                     "content": form.content, 
                     "reply_id": 0
                 }
@@ -84,11 +84,11 @@
 
                 if(props.showCancel) emit("cancel")
 
-                // 评论成功，通知父组件刷新数据
+                // Comment successfully, notify the parent component to refresh data
                 emit("success",data.value)
 
                 const { message } = createDiscreteApi(["message"])
-                message.success("评论成功")
+                message.success("Comment Success")
 
                 form.content = ""
 

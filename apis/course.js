@@ -1,11 +1,11 @@
-// 获取课程列表
+// Get Course List
 export function useCourseListApi(page) {
   return useHttpGet("CourseList", `/course/list?page=${page}`, {
     lazy: true,
   });
 }
 
-// 查看课程详情
+// View course details
 export function useReadCourseApi(query = {}) {
   let q = useQueryToString(query);
   return useHttpGet("readCourse", `/course/read${q}`, {
@@ -13,12 +13,12 @@ export function useReadCourseApi(query = {}) {
   });
 }
 
-// 精品推荐
+// Recommended
 export function useHotCourseListApi() {
   return useHttpGet("HotCourseList", `/hot`);
 }
 
-// 免费学习
+// Learn for free
 export function useLearnApi(body) {
   return useHttpPost("learn", "/order/learn", {
     body,

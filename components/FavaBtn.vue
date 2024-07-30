@@ -1,6 +1,6 @@
 <template>
     <n-button strong secondary :type="is_fava ? 'primary' : 'tertiary'" size="tiny" :loading="loading" @click="handleFava">
-      收藏
+      Favorite
     </n-button>
 </template>
 <script setup>
@@ -28,7 +28,7 @@
 
     const loading = ref(false)
     const handleFava = ()=>{
-        // 登录之后才能收藏/取消收藏
+        // Login to save/Cancel
         useHasAuth(async ()=>{
             loading.value = true
 
@@ -46,7 +46,7 @@
 
             const { message } = createDiscreteApi(["message"])
 
-            message.success((is_fava.value ? "取消收藏" : "收藏") + "成功")
+            message.success((is_fava.value ? "Remove from favorite" : "Favorite") + "success")
 
             is_fava.value = !is_fava.value
 

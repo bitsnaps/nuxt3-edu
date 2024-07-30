@@ -7,12 +7,12 @@ export function useSearchListApi(query) {
   });
 }
 
-// 获取可用优惠券列表
+// Get a list of available coupons
 export function useCouponListApi() {
   return useHttpGet("CouponList", "/coupon/list");
 }
 
-// 通用列表
+// General List
 export function useListApi(type, query = {}) {
   let q = useQueryToString(query);
   return useHttpGet(type + "List", `/${type}/list${q}`, {
@@ -20,7 +20,7 @@ export function useListApi(type, query = {}) {
   });
 }
 
-// 查看课程/专栏详情
+// View course/section details
 export function useReadDetailApi(type, query = {}) {
   let q = useQueryToString(query);
   return useHttpGet("readDetail", `/${type}/read${q}`, {

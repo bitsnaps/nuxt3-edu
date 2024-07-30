@@ -6,10 +6,10 @@
             </slot>
         </template>
         <template v-else-if="error">
-            <n-result class="mt-10" status="500" title="错误提示" 
-            :description="error?.data?.data || '页面走丢了~'">
+            <n-result class="mt-10" status="500" title="Error message" 
+            :description="error?.data?.data || 'The page is lost~'">
                 <template #footer>
-                    <n-button @click="$router.go(-1)">返回上一页</n-button>
+                    <n-button @click="$router.go(-1)">Go back to previous page</n-button>
                 </template>
             </n-result>
         </template>

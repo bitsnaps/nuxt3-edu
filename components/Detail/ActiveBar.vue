@@ -4,8 +4,8 @@
             <span>
                 {{
                     type == "group"
-                    ? `${data.group.p_num}人拼团`
-                    : `${data.flashsale.used_num}人已抢/剩${data.flashsale.s_num}名`
+                    ? `${data.group.p_num} Group Buying`
+                    : `${data.flashsale.used_num}People have grabbed/left${data.flashsale.s_num}name`
                 }}
             </span>
             <span class="flex items-center">

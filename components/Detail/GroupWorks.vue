@@ -2,7 +2,7 @@
     <n-card class="mb-5">
         <template #header>
             <div class=" text-gray-500 text-sm">
-                {{ data.count }} 人在拼单,可直接参与
+                {{ data.count }} People who are group buying can directly participate
             </div>
         </template>
         <n-scrollbar style="height: 60px;">
@@ -12,13 +12,13 @@
                 :src="item.users[0].avatar" round></n-avatar>
                 <span class="ml-2">{{ item.users[0].nickname || item.users[0].username }}</span>
                 <div class="ml-auto">
-                    <p>还差 <span class="text-rose-500">{{ item.total - item.num }}人</span> 拼成</p>
+                    <p>Still bad <span class="text-rose-500">{{ item.total - item.num }} person(s)</span> spell</p>
                     <div class="text-xs text-gray-500 mt-1 flex items-center">
-                        剩余
+                        Remaining
                         <CountDown :time="item.end_time" @end="handleTimeUp(index)"/>
                     </div>
                 </div>
-                <n-button type="primary" size="small" class="ml-2" :loading="item.loading" @click="handleGroup(item)">去拼团</n-button>
+                <n-button type="primary" size="small" class="ml-2" :loading="item.loading" @click="handleGroup(item)">Go to group</n-button>
             </div>
         </n-scrollbar>
     </n-card>
@@ -62,10 +62,10 @@ function handleGroup(item){
     useHasAuth(()=>{
         const { dialog } = createDiscreteApi(["dialog"])
         dialog.success({
-          title: "提示",
-          content: "是否要参与此次拼单？",
-          positiveText: "确定",
-          negativeText: "取消",
+          title: "Tips",
+          content: "Do you want to participate in this group order?",
+          positiveText: "OK",
+          negativeText: "Cancel",
           onPositiveClick(){
             item.loading = true
             useCreateOrderApi({

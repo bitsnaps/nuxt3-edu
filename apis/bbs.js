@@ -1,4 +1,4 @@
-// 点赞/取消点赞
+// Like/Unlike
 export function usePostSupportApi(post_id, type = "support") {
   return useHttpPost("postSupport", `/post/${type}`, {
     body: {
@@ -7,7 +7,7 @@ export function usePostSupportApi(post_id, type = "support") {
   });
 }
 
-// 删除帖子
+// Delete a post
 export function useDeletePostApi(id) {
   return useHttpPost("deletePost", `/post/delete`, {
     body: {
@@ -16,14 +16,14 @@ export function useDeletePostApi(id) {
   });
 }
 
-// 社区分类列表
+// Community Category List
 export function useBbsListApi() {
   return useHttpGet("bbsList", "/bbs?page=1", {
     lazy: true,
   });
 }
 
-// 指定分类下的帖子列表
+// List of posts in a specified category
 export function usePostListApi(query) {
   return useHttpGet("postList", () => {
     let q = useQueryToString(query());
@@ -33,14 +33,14 @@ export function usePostListApi(query) {
   });
 }
 
-// 查看帖子
+// View Post
 export function useReadPostApi(id) {
   return useHttpGet("readPost", "/post/read?id=" + id, {
     lazy: true,
   });
 }
 
-// 查看帖子评价列表
+// View post comments list
 export function usePostCommentApi(query) {
   return useHttpGet("PostComment", () => {
     let q = useQueryToString(query());
@@ -50,14 +50,14 @@ export function usePostCommentApi(query) {
   });
 }
 
-// 评论帖子
+// Comment on a post
 export function useReplyPostApi(body) {
   return useHttpPost("ReplyPost", "/post/reply", {
     body,
   });
 }
 
-// 发布帖子
+// Post a message
 export function useAddPostApi(body) {
   return useHttpPost("addPost", "/post/save", {
     body,

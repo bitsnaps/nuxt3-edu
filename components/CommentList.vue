@@ -13,7 +13,7 @@
                 {{ item.content }}
             </p>
             <n-button strong secondary size="small" @click="openInput">
-                回复
+                Reply
             </n-button>
 
             <CommentInput v-if="showInput" showCancel 

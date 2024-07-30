@@ -2,19 +2,19 @@
     <UiCard>
         <UiCardHeader class="flex justify-between">
             <span>{{ item.testpaper.title }}</span>
-            <span :class="item.answer_status ? 'text-green-600' : 'text-rose-600'">{{ item.answer_status ? '考试完成' : '考试中' }}</span>
+            <span :class="item.answer_status ? 'text-green-600' : 'text-rose-600'">{{ item.answer_status ? 'Exam completion' : 'During the exam' }}</span>
         </UiCardHeader> 
         <UiCardBody>
-            <small class="mr-3">题目总数：{{ item.testpaper.question_count }}</small>
-            <small class="mr-3">总分数：{{ item.testpaper.total_score }}</small>
-            <small class="mr-3">及格分：{{ item.testpaper.pass_score }}</small>
+            <small class="mr-3">Total number of questions:{{ item.testpaper.question_count }}</small>
+            <small class="mr-3">Total score:{{ item.testpaper.total_score }}</small>
+            <small class="mr-3">Passing score:{{ item.testpaper.pass_score }}</small>
         </UiCardBody>
         <UiCardFooter class="flex justify-between">
             <span>{{ item.created_time }}</span>
             <span>
-                最终得分：
+                Final score:
                 <span :class="item.read_status ? 'text-green-600' : 'text-rose-600'">
-                    {{ item.read_status ? item.score : '正在阅卷' }}
+                    {{ item.read_status ? item.score : 'Marking' }}
                 </span>
             </span>
         </UiCardFooter>

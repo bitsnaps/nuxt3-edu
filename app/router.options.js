@@ -1,6 +1,6 @@
 export default {
   scrollBehavior(to, from, savedPosition) {
-    // 在按下 后退/前进 按钮时。就会像浏览器的原生表现那样
+    // When you press the Back/Forward button, it will behave like the native browser
     if (savedPosition) {
       return savedPosition;
     }

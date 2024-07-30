@@ -1,6 +1,6 @@
 <template>
   <n-alert  :type="status == 'ing' ? 'success' : 'default'" :show-icon="false">
-    <p class="text-xs text-gray-500">直播时间：{{ start }} ~ {{ end }}</p>
+    <p class="text-xs text-gray-500">Live broadcast time:{{ start }} ~ {{ end }}</p>
   </n-alert>
 </template>
 <script setup>

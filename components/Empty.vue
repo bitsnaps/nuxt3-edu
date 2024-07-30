@@ -8,7 +8,7 @@ import {
 defineProps({
     desc:{
         type:String,
-        default:"暂无数据"
+        default:"No data"
     }
 })
 </script>

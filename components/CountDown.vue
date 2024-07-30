@@ -1,7 +1,7 @@
 <template>
     <div class="count-down">
         <small>{{ data.days }}</small>
-        天
+        day
         <small>{{ data.hours }}</small>
         :
         <small>{{ data.minutes }}</small>
@@ -28,18 +28,18 @@ function useCountDown(end_time){
         end_time = (new Date(end_time)).getTime()
     }
 
-    // 结束时间戳 - 当前时间戳，毫秒转为秒
+    // End timestamp - current timestamp, milliseconds converted to seconds
     timeout.value = (end_time - Date.now()) / 1000
 
-    // 如果timeout<=0, 直接结束
+    // If timeout<=0, end directly
     if(timeout.value <= 0) return emit("end")
 
     close()
 
-    // 开启倒计时
+    // Start countdown
     Timer.value = setInterval(() => {
         timeout.value--
-        // 如果 timeout.value <= 0，关闭定时器，触发结束
+        // If timeout.value <= 0, turn off the timer and trigger the end
         if(timeout.value <= 0){
             close()
             emit("end")
@@ -50,14 +50,14 @@ function useCountDown(end_time){
         if(Timer.value) clearInterval(Timer.value)
     }
 
-    // 将 秒 转 天/时/分/秒
+    // Convert seconds to days/hours/minutes/seconds
     const d = computed(()=>formatDiffDate(timeout.value))
 
     return d
 }
 
 
-// 毫秒 转 天/时/分/秒
+// Milliseconds to Days/Hours/Minutes/Seconds
 function formatDiffDate(seconds) {
     let time = {
         days: 0,
@@ -73,7 +73,7 @@ function formatDiffDate(seconds) {
         time.seconds = Math.floor(seconds) - time.days * 24 * 60 * 60 - time.hours * 60 * 60 - time.minutes * 60;
     }
 
-    //手动三元补零
+    //Manual ternary zero padding
     time.days = time.days < 10 ? "0" + time.days : time.days;
     time.hours = time.hours < 10 ? "0" + time.hours : time.hours;
     time.minutes = time.minutes < 10 ? "0" + time.minutes : time.minutes;

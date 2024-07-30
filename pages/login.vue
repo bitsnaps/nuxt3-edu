@@ -1,4 +1,5 @@
 <template>
+<div>
     <n-form class="w-[340px]" ref="formRef" :model="form" :rules="rules" size="large">
         <n-form-item :show-label="false" path="username">
             <n-input v-model:value="form.username" :placeholder="type === 'login' ? 'Username/Mobile/Email' : 'Username'" />
@@ -14,7 +15,7 @@
                 {{ type === 'login' ? 'Register' : 'Login' }}
             </n-button>
             <nuxt-link to="/forget">
-                <n-button quaternary type="primary" size="tiny">forget the password?</n-button>
+                <n-button quaternary type="primary" size="tiny">Forget the password?</n-button>
             </nuxt-link>
         </div>
         <div>
@@ -29,6 +30,7 @@
             <n-button quaternary type="primary" size="tiny">Privacy Policy</n-button>
         </div>
     </n-form>
+    </div>
 </template>
 <script setup>
 import {

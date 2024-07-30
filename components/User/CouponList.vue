@@ -1,12 +1,12 @@
 <template>
-    <n-card class="coupon" :class="{ 'coupon-disabled': (btn != '立即使用')}">
-        <h4>￥{{ item.price }}</h4>
-        <p>适用{{ o[item.type] }}：{{ item.title }}</p>
+    <n-card class="coupon" :class="{ 'coupon-disabled': (btn != 'Use now')}">
+        <h4>${{ item.price }}</h4>
+        <p>Applicable {{ o[item.type] }}：{{ item.title }}</p>
         <p class="!text-xs mt-3">有效期：{{ item.start_time }} ~ {{ item.end_time }}</p>
         <template #footer>
             <div class="flex justify-end">
-                <n-button :type="btn != '立即使用' ? '' : 'warning'"
-                :disabled="btn != '立即使用'"
+                <n-button :type="btn != 'Use now' ? '' : 'warning'"
+                :disabled="btn != 'Use now'"
                 @click="open">
                     {{ btn }}
                 </n-button>
@@ -21,8 +21,8 @@ import {
 } from "naive-ui"
 
 const o = {
-    course:"课程",
-    column:"专栏"
+    course:"Course",
+    column:"Column"
 }
 
 const props = defineProps({
@@ -32,7 +32,7 @@ const props = defineProps({
 const btn = computed(()=>{
     const v = props.item
     v.expired = (new Date(v.end_time)).getTime() < (new Date()).getTime()
-    return v.used ? '已使用' : (v.expired ? '已过期' : '立即使用')
+    return v.used ? 'Used' : (v.expired ? 'Expired' : 'Use now')
 })
 
 const open = ()=>{

@@ -13,7 +13,7 @@
             container: document.getElementById('aplayer'),
             audio: [{
                 name: props.title,
-                artist: '帝莎编程',
+                artist: 'Disha Programming',
                 url: props.url,
                 cover: props.cover
             }]

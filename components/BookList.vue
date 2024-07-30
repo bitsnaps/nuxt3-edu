@@ -10,7 +10,7 @@
                 </div>
                 <n-button strong secondary round type="primary" class="ml-auto"
                 @click="open">
-                    {{ item.sub_count == 0 ? '立即订阅' : (item.sub_count + '人订阅') }}
+                    {{ item.sub_count == 0 ? 'Subscribe Now' : (item.sub_count + 'People subscribed') }}
                 </n-button>
             </div>
         </div>

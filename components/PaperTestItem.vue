@@ -7,9 +7,9 @@
             <!-- Title content -->
             <p class="mb-5" v-html="item.title"></p>
 
-            <!-- 题目选项 -->
+            <!-- Title Options -->
             <div v-if="item.type == 'radio' || item.type == 'trueOrfalse' || item.type == 'checkbox'">
-                <p class="tip">答案：</p>
+                <p class="tip">Answers: </p>
                 <ul>
                     <li class="option" v-for="(q,qI) in item.options" :key="qI"
                     @click="handleChooseOption(qI)"
@@ -20,12 +20,12 @@
                 </ul>
             </div>
 
-            <!-- 填空 -->
+            <!-- fill a job vacancy -->
             <div v-else-if="item.type == 'completion'">
                 <div class="mb-3 border rounded p-3"
                 v-for="(uv,uvI) in modelValue" :key="uvI">
                     <div class="flex items-center justify-between mb-3">
-                        <h5 class="text-sm">填空 {{ uvI + 1 }}</h5>
+                        <h5 class="text-sm">Fill in a blank {{ uvI + 1 }}</h5>
                         <n-icon v-if="uvI > 0" @click="remove(uvI)">
                             <Close/>
                         </n-icon>
@@ -33,23 +33,23 @@
                     <n-input
                         v-model:value="modelValue[uvI]"
                         type="textarea"
-                        :placeholder="'填空 ' + (uvI + 1)"
+                        :placeholder="'Fill in the blank ' + (uvI + 1)"
                     />
                 </div>
 
                 <n-button type="primary" dashed class="w-full my-3" @click="add">
-                    添加填空
+                    Add fill-in
                 </n-button>
 
             </div>
 
-            <!-- 问答 -->
+            <!-- Questions and Answers -->
             <div v-else>
                 <div class="mb-3 border rounded p-3">
                     <n-input
                         v-model:value="modelValue[0]"
                         type="textarea"
-                        placeholder="请填写内容"
+                        placeholder="Please fill in the content"
                     />
                 </div>
             </div>
@@ -77,25 +77,25 @@
 
     const modelValue = ref(props.item.user_value)
 
-    // 移除填空
+    // Remove fill
     function remove(i){
         const { dialog } = createDiscreteApi(["dialog"])
         dialog.warning({
-            content:"是否要删除该填空？",
-            positiveText:"确定",
-            negativeText:"取消",
+            content:"Do you want to delete this fill-in?",
+            positiveText:"OK",
+            negativeText:"Cancel",
             onPositiveClick(){
                 modelValue.value.splice(i,1)
             }
         })
     }
 
-    // 添加填空
+    // Add fill-in
     function add(){
         modelValue.value.push("")
     }
 
-    // 单选/多选是否选中
+    // Single choice/multiple choice selected
     function isActive(v){
         const { item } = props
         if(item.type == "radio" || item.type == "trueOrfalse"){
@@ -118,16 +118,16 @@
         }
     }
 
-    // 题目类型
+    // Question Type
     const typeOptions = {
-        answer:"问答题",
-        completion:"填空题",
-        trueOrfalse:"判断题",
-        checkbox:"多选题",
-        radio:"单选题"
+        answer:"Questions and Answers",
+        completion:"Fill in the Blanks",
+        trueOrfalse:"True or False",
+        checkbox:"Multiple Choice",
+        radio:"Multiple choice questions"
     }
 
-    // 选项转化
+    // Option conversion
     const en = {
         0:"A",
         1:"B",
@@ -138,7 +138,7 @@
         6:"G",
     }
 
-    // 监听值变化
+    // Listening for value changes
     const emit = defineEmits(["change"])
     watch(modelValue,(newVal)=>{
         emit("change",unref(newVal))

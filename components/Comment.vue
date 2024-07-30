@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="px-5 pb-5">
-            <h4>精彩评论</h4>
+            <h4>Wonderful comments</h4>
         </div>
 
         <LoadingGroup :pending="pending" :error="error" :is-empty="rows.length === 0">
@@ -45,14 +45,14 @@
 
     console.log(rows)
 
-    // 分页
+    // Pagination
     function handlePageChange(p){
         page.value = p
         refresh()
     }
 
     function handleCommentSuccess(){
-        console.log("回复成功")
+        console.log("Reply Success")
         refresh()
     }
 

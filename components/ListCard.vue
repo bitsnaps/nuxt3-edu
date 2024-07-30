@@ -2,7 +2,7 @@
     <div>
         <div class="flex mb-3">
             <span class="text-lg">{{ title }}</span>
-            <n-button quaternary class="ml-auto">查看更多</n-button>
+            <n-button quaternary class="ml-auto">View more</n-button>
         </div>
         <n-grid x-gap="12" :cols="4" class="mb-6">
             <n-gi v-for="(item,index) in pdata" :key="index">

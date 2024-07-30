@@ -1,11 +1,11 @@
-// 获取产品信息
+// Get product information
 export function useGetGoodsInfoApi(id, type = "course") {
   return useHttpGet("GetGoodsInfo", `/goods/read?type=${type}&id=${id}`, {
     lazy: true,
   });
 }
 
-// 获取可用优惠券
+// Get available coupons
 export function useGetUseableUserCouponApi(id, type = "course") {
   return useHttpGet(
     "GetUseableUserCoupon",
@@ -13,7 +13,7 @@ export function useGetUseableUserCouponApi(id, type = "course") {
   );
 }
 
-// 创建订单
+// Create Order
 export function useCreateOrderApi(body, type = "") {
   let url = `/order/save`;
 
@@ -28,7 +28,7 @@ export function useCreateOrderApi(body, type = "") {
   });
 }
 
-// 微信pc支付
+// WeChat PC payment
 export function useWxpayApi(no) {
   return useHttpPost("wxpay", `/order/wxpay`, {
     body: {
@@ -37,7 +37,7 @@ export function useWxpayApi(no) {
   });
 }
 
-// 查询订单是否支付成功
+// Check whether the order payment is successful
 export function useGetWxpayStatusApi(no) {
   return useHttpPost("getWxpayStatus", `/order/iswxpay`, {
     body: {
@@ -47,7 +47,7 @@ export function useGetWxpayStatusApi(no) {
   });
 }
 
-// 当前拼团专栏/课程的可组团列表
+// List of groups that can be formed in the current group buying column/course
 export function useGetGroupWorkListApi(group_id, page = 1) {
   return useHttpGet(
     "getGroupWorkList",

@@ -3,10 +3,10 @@
         <n-tag v-if="item.type" type="info" :bordered="false" size="small" class="mr-3">
             {{ t[item.type] }}
         </n-tag>
-        章节{{ index + 1 }}.{{ item.title }}
+        Chapter {{ index + 1 }}.{{ item.title }}
 
         <n-tag v-if="item.price == 0 || item.isfree == 1" type="success" :bordered="false" size="small" class="ml-auto">
-            免费
+            Free
         </n-tag>
     </li>
 </template>
@@ -24,9 +24,9 @@
     })
 
     const t = {
-        media:"图文",
-        audio:"音频",
-        video:"视频"
+        media:"Graphics",
+        audio:"Audio",
+        video:"Video"
     }
 
 </script>

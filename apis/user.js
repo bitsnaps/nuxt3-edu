@@ -1,11 +1,11 @@
-// 登录
+// Login
 export function useLoginApi(body) {
   return useHttpPost("login", "/login", {
     body,
   });
 }
 
-// 注册
+// register
 export function useRegApi(body) {
   return useHttpPost("reg", "/reg", {
     body,
@@ -18,12 +18,12 @@ export function useGetinfoApi() {
   });
 }
 
-// 退出登录
+// logout
 export function useLogoutApi() {
   return useHttpPost("logout", "/logout");
 }
 
-// 获取手机验证码
+// Get mobile verification code
 export function useGetCaptchaApi(phone) {
   return useHttpPost("GetCaptcha", "/get_captcha", {
     body: {
@@ -32,21 +32,21 @@ export function useGetCaptchaApi(phone) {
   });
 }
 
-// 绑定手机号
+// Bind mobile phone number
 export function useBindPhoneApi(body) {
   return useHttpPost("bindphone", "/bind_mobile", {
     body,
   });
 }
 
-// 忘记密码
+// forget the password
 export function useForgetApi(body) {
   return useHttpPost("forget", "/forget", {
     body,
   });
 }
 
-// 获取学习记录
+// Get learning records
 export function useUserHistoryApi(query) {
   return useHttpGet("userHistory", () => {
     let q = useQueryToString(query());
@@ -56,63 +56,63 @@ export function useUserHistoryApi(query) {
   });
 }
 
-// 获取购买记录
+// Get purchase records
 export function useOrderListApi(page) {
   return useHttpGet("OrderList", `/order/list?page=${page}`, {
     lazy: true,
   });
 }
 
-// 我的考试记录
+// My exam records
 export function useUserTestApi(page) {
   return useHttpGet("UserTest", `/user_test/list?page=${page}`, {
     lazy: true,
   });
 }
 
-// 我的帖子列表
+// My Posts List
 export function useMypostListApi(page) {
   return useHttpGet("MypostList", `/mypost?page=${page}`, {
     lazy: true,
   });
 }
 
-// 获取优惠券记录
+// Get coupon records
 export function useUserCouponApi(page) {
   return useHttpGet("UserCoupon", `/user_coupon?page=${page}`, {
     lazy: true,
   });
 }
 
-// 我的收藏列表
+// My favorites list
 export function useMyFavaListApi(page) {
   return useHttpGet("MyFavaList", `/user_fava?page=${page}`, {
     lazy: true,
   });
 }
 
-// 取消收藏
+// Remove from favorites
 export function useUncollectApi(body) {
   return useHttpPost("Uncollect", "/uncollect", {
     body,
   });
 }
 
-// 收藏
+// Collect
 export function useCollectApi(body) {
   return useHttpPost("collect", "/collect", {
     body,
   });
 }
 
-// 修改资料
+// Modify information
 export function useUpdateUserInfoApi(body) {
   return useHttpPost("updateUserInfo", "/update_info", {
     body,
   });
 }
 
-// 上传图片
+// upload image
 export function useUploadConfig() {
   const token = useCookie("token");
   return {
@@ -124,14 +124,14 @@ export function useUploadConfig() {
   };
 }
 
-// 修改密码
+// change Password
 export function useupdatePasswordApi(body) {
   return useHttpPost("updatePassword", "/update_password", {
     body,
   });
 }
 
-// 领取优惠券
+// Get coupons
 export function useReceiveUserCouponApi(body) {
   return useHttpPost("receiveUserCoupon", "/user_coupon/receive", {
     body,

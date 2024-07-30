@@ -1,7 +1,7 @@
 <template>
     <div class="navbar">
         <div class="container flex items-center h-[60px]">
-            <n-button text class="!text-xl !font-bold">帝莎编程</n-button>
+            <n-button text class="!text-xl !font-bold">Disha Programming</n-button>
             
             <ui-menu>
                 <ui-menu-item v-for="(item,index) in menus" :key="index" :active="isMenuItemActive(item)" @click="handleOpen(item.path)">
@@ -15,7 +15,7 @@
                 </template>
             </n-button>
             <nuxt-link to="/login" v-if="!user">
-                <n-button secondary strong>登录</n-button>
+                <n-button secondary strong>Login</n-button>
             </nuxt-link>
             
             <n-dropdown v-else :options="userOptions" @select="handleSelect">
@@ -46,16 +46,16 @@ const user = useUser()
 
 const route = useRoute()
 const menus = [{
-    name:"首页",
+    name:"Home",
     path:"/"
 },{
-    name:"考试",
+    name:"Take an exam",
     path:"/paper/1",
     match:[{
         name:"paper-page"
     }]
 },{
-    name:"拼团",
+    name:"Group Buying",
     path:"/list/group/1",
     match:[{
         name:"list-type-page",
@@ -64,7 +64,7 @@ const menus = [{
         }
     }]
 },{
-    name:"秒杀",
+    name:"Flash Sale",
     path:"/list/flashsale/1",
     match:[{
         name:"list-type-page",
@@ -73,7 +73,7 @@ const menus = [{
         }
     }]
 },{
-    name:"直播",
+    name:"Live streaming",
     path:"/list/live/1",
     match:[{
         name:"list-type-page",
@@ -82,7 +82,7 @@ const menus = [{
         }
     }]
 },{
-    name:"专栏",
+    name:"Column",
     path:"/list/column/1",
     match:[{
         name:"list-type-page",
@@ -91,7 +91,7 @@ const menus = [{
         }
     }]
 },{
-    name:"电子书",
+    name:"E-book",
     path:"/list/book/1",
     match:[{
         name:"list-type-page",
@@ -100,13 +100,13 @@ const menus = [{
         }
     }]
 },{
-    name:"社区",
+    name:"Community",
     path:"/bbs/0/1",
     match:[{
         name:"bbs-bbs_id-page"
     }]
 },{
-    name:"课程",
+    name:"Course",
     path:"/list/course/1",
     match:[{
         name:"list-type-page",
@@ -133,10 +133,10 @@ const isMenuItemActive = (item)=>{
 }
 
 const userOptions = [{
-    label: "用户中心",
+    label: "User Center",
     key: "center",
 },{
-    label: "退出",
+    label: "Exit",
     key: "logout",
 }]
 
@@ -150,9 +150,9 @@ const handleSelect = (k)=>{
         case "logout":
             const { dialog } = createDiscreteApi(["dialog"])
             dialog.warning({
-                content: "是否要退出登录？",
-                positiveText: "退出",
-                negativeText: "取消",
+                content: "Do you want to log out?",
+                positiveText: "OK",
+                negativeText: "Cancel",
                 onPositiveClick: async () => {
                     await useLogout()
                 },

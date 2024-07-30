@@ -13,7 +13,7 @@
         <template #footer v-if="item.group_id || item.flashsale_id">
             <ClientOnly>
                 <div class=" bg-yellow-500 text-white p-3 text-xs flex items-center rounded-b">
-                    {{ item.group_id ? '拼团中' : '秒杀中' }}
+                    {{ item.group_id ? 'In group' : 'Flash sale' }}
                     <div class="ml-auto flex items-center">
                         倒计时
                         <CountDown :time="item.end_time"/>
@@ -33,20 +33,20 @@ const props = defineProps({
 
 const open = ()=>{
     let path = ""
-    // 课程详情
+    // Course Details
     if(["course","media","audio","video"].includes(props.item.type)){
         path = `/detail/course/${props.item.id}`
     }
-    // 专栏详情
+    // Column Details
     else if(props.item.type == "column"){
         path = `/detail/column/${props.item.id}`
     }
-    // 直播详情
+    // Live broadcast details
     else if(props.item.type == "live"){
         path = `/detail/live/${props.item.id}`
     }
 
-    // 秒杀和拼团
+    // Flash sales and group buying
     if(props.item.group_id){
         path = `${path}?group_id=${props.item.group_id}`
     }

@@ -10,20 +10,20 @@
 
     const route = useRoute()
 
-    // 当前社区分类ID
+    // Current community category ID
     const bbs_id = ref(parseInt(route.params.bbs_id))
 
     const tabs = computed(()=>{
         return [
             {
                 id:0,
-                title:"全部"
+                title:"all"
             },
             ...(data.value ? data.value.rows : [])
         ]
     })
 
-    // 切换社区分类
+    // Switch community category
     function handleClick(id){
         navigateTo({
             params:{
