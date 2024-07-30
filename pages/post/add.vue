@@ -4,7 +4,7 @@
             <n-form :model="form" ref="formRef" :rules="rules" :show-label="false"
             style="width: 600px;">
                 <n-form-item path="bbs_id">
-                    <n-select class="w-full" v-model:value="form.bbs_id" placeholder="请选择社区" :options="options" clearable value-field="id" label-field="title"/>
+                    <n-select class="w-full" v-model:value="form.bbs_id" placeholder="Please select a community" :options="options" clearable value-field="id" label-field="title"/>
                 </n-form-item>
                 <div class="bg-white rounded p-5 mb-5 shadow"
                 v-for="(item,index) in form.content" :key="index">
@@ -20,7 +20,7 @@
                         <n-input
                             v-model:value="item.text"
                             type="textarea"
-                            placeholder="请填写帖子内容"
+                            placeholder="Please fill in the post content"
                         />
                     </n-form-item>
 
@@ -31,12 +31,12 @@
 
                 <n-form-item>
                     <n-button type="info" dashed class="w-full" @click="addBlock">
-                        添加区块
+                        Add Block
                     </n-button>
                 </n-form-item>
 
                 <n-form-item>
-                    <n-button type="primary" class="ml-auto" :loading="loading" @click="onSubmit">发布</n-button>
+                    <n-button type="primary" class="ml-auto" :loading="loading" @click="onSubmit">Publish</n-button>
                 </n-form-item>
             </n-form>
         </ClientOnly>
@@ -74,12 +74,12 @@
     const rules = {
         bbs_id:[{
             required:true,
-            message:"请选择社区"
+            message:"Please select a community"
         }]
     }
 
 
-    // 添加区块
+    // Add Block
     function addBlock(){
         form.content.push({
             text:"",
@@ -87,16 +87,16 @@
         })
     }
 
-    // 移除区块
+    // Remove Block
     function removeBlock(index){
         const { dialog,message } = createDiscreteApi(["dialog","message"])
         dialog.warning({
-            content:"是否要删除该区块？",
-            positiveText:"确定",
-            negativeText:"取消",
+            content:"Do you want to delete this block?",
+            positiveText:"Sure",
+            negativeText:"Cancel",
             onPositiveClick(){
                 form.content.splice(index,1)
-                message.success("删除成功")
+                message.success("Successfully deleted")
             }
         })
     }
@@ -106,7 +106,7 @@
         formRef.value.validate(async errors => {
             const { message } = createDiscreteApi(["message"])
             if(errors || (form.content.filter(o=>o.text.trim() == '')).length > 0){
-                return message.warning("请检查帖子内容是否为空")
+                return message.warning("Please check if the post content is empty")
             }
 
             loading.value = true
@@ -120,7 +120,7 @@
 
             if(error.value) return 
 
-            message.success("发帖成功")
+            message.success("Post successfully")
 
             navigateTo("/bbs/0/1")
 

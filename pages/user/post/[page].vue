@@ -13,7 +13,7 @@ import {
     NPagination
 } from "naive-ui"
 
-useHead({ title:"我的帖子" })
+useHead({ title:"My posts" })
 
 const {
     page,

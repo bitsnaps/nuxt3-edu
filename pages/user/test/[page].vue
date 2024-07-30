@@ -13,7 +13,7 @@ import {
     NPagination
 } from "naive-ui"
 
-useHead({ title:"考试记录" })
+useHead({ title:"Exam Records" })
 
 const {
     page,

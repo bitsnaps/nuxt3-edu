@@ -2,7 +2,7 @@
     <div>
         <n-breadcrumb class="mb-5">
             <n-breadcrumb-item>
-                <nuxt-link to="/">首页</nuxt-link>
+                <nuxt-link to="/">Home</nuxt-link>
             </n-breadcrumb-item>
             <n-breadcrumb-item>{{ title }}</n-breadcrumb-item>
         </n-breadcrumb>

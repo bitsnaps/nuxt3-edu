@@ -1,4 +1,4 @@
-// 将对象转url参数
+// Convert objects to url parameters
 export function useQueryToString(query = {}) {
   let q = "";
   for (const key in query) {
@@ -11,12 +11,12 @@ export function useQueryToString(query = {}) {
   return q;
 }
 
-// 回车事件
+// Carriage return event
 export function useEnterEvent(event) {
   function handleEnterEvent(e) {
     if (e.key === "Enter") {
       event();
-      // 取消事件的默认动作
+      // Cancel the default action of an event
       e.preventDefault();
     }
   }
@@ -25,7 +25,7 @@ export function useEnterEvent(event) {
   onUnmounted(() => document.removeEventListener("keydown", handleEnterEvent));
 }
 
-// 时间状态判断
+// Time status judgment
 export function useTimeStatus(start, end) {
   start = (new Date(start)).getTime();
   end = (new Date(end)).getTime();

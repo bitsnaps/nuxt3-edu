@@ -1,28 +1,28 @@
 <template>
     <n-form class="w-[340px]" ref="formRef" :model="form" :rules="rules" size="large">
         <n-form-item :show-label="false" path="phone">
-            <n-input v-model:value="form.phone" placeholder="手机号"/>
+            <n-input v-model:value="form.phone" placeholder="Phone number"/>
         </n-form-item>
         <n-form-item :show-label="false" path="code">
             <n-input-group>
-                <n-input :style="{ width: '75%' }" v-model:value="form.code" placeholder="验证码"/>
+                <n-input :style="{ width: '75%' }" v-model:value="form.code" placeholder="Verification Code"/>
                 <SendCode :phone="form.phone"/>
             </n-input-group>
         </n-form-item>
         <n-form-item :show-label="false" path="password">
-            <n-input v-model:value="form.password" placeholder="密码" type="password"/>
+            <n-input v-model:value="form.password" placeholder="Password" type="password"/>
         </n-form-item>
         <n-form-item :show-label="false" path="repassword">
-            <n-input v-model:value="form.repassword" placeholder="确认密码" type="password" :disabled="!form.password"/>
+            <n-input v-model:value="form.repassword" placeholder="Confirm Password" type="password" :disabled="!form.password"/>
         </n-form-item>
         <div class="flex justify-between w-full mb-2">
             <n-button quaternary type="primary" size="tiny" @click="$router.go(-1)">
-                登录
+                Login
             </n-button>
         </div>
         <div>
             <n-button class="w-full" type="primary" @click="onSubmit" :loading="loading">
-                重置密码
+                Reset Password
             </n-button>
         </div>
     </n-form>
@@ -37,7 +37,7 @@ import {
     createDiscreteApi
 } from "naive-ui"
 const router = useRouter()
-useHead({ title:"忘记密码" })
+useHead({ title:"Forget the password" })
 
 const formRef = ref(null)
 const form = reactive({
@@ -50,24 +50,24 @@ const form = reactive({
 const rules = {
     phone:[{
         required: true,
-        message:'手机号必填'
+        message:'Mobile phone number is required'
     }],
     code:[{
         required: true,
-        message:'验证码必填'
+        message:'Verification code required'
     }],
     password:[{
         required: true,
-        message:"密码必填"
+        message:"Password required"
     }],
     repassword:[{
         required: true,
-        message:"确认密码必填"
+        message:"Confirm Password Required"
     },{
         validator(rule, value) {
             return value === form.password
         },
-        message:"两次密码输入不一致",
+        message:"The two passwords you entered do not match.",
         trigger: ["input", "blur"]
     }]
 }
@@ -90,7 +90,7 @@ const onSubmit = ()=>{
 
         const { message } = createDiscreteApi(["message"])
 
-        message.success("重置密码成功")
+        message.success("Password reset successful")
 
         router.go(-1)
     })
@@ -99,7 +99,7 @@ const onSubmit = ()=>{
 useEnterEvent(()=>onSubmit())
 
 definePageMeta({
-    title:"忘记密码",
+    title:"Forget the password",
     layout:"login",
     middleware:["only-visitor"]
 })

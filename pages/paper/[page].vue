@@ -38,6 +38,6 @@ const {
 })
 
 useHead({
-    title:"考试列表"
+    title:"Exam List"
 })
 </script>

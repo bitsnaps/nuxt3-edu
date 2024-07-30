@@ -1,10 +1,10 @@
 <template>
     <div class="test-item">
         <div class="title">
-            第{{ index + 1 }}题 {{ typeOptions[item.type] }}
+            No.{{ index + 1 }}题 {{ typeOptions[item.type] }}
         </div>
         <div class="p-4">
-            <!-- 题目内容 -->
+            <!-- Title content -->
             <p class="mb-5" v-html="item.title"></p>
 
             <!-- 题目选项 -->

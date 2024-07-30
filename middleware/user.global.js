@@ -1,4 +1,4 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  // 2024-1-5 添加 enforce = false 防止重复刷新用户信息
+  // 2024-1-5 Add enforce = false to prevent repeated refresh of user information
   await useRefreshUserInfo(false);
 });

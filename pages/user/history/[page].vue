@@ -21,13 +21,13 @@ import {
 } from "naive-ui"
 const route = useRoute()
 const type = ref(route.query.tab || 'course') 
-useHead({ title:"学习记录" })
+useHead({ title:"Learning Record" })
 
 const tabs = [{
-    label:"课程",
+    label:"Course",
     value:"course"
 },{
-    label:"专栏",
+    label:"Column",
     value:"column"
 }]
 

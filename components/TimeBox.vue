@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup>
-    // 秒 => 时分秒
+    // Seconds => Hours, Minutes, Seconds
     const toHHmmss = (data) => {
         let s;
         let hours = parseInt((data % (60 * 60 * 24)) / (60 * 60));
@@ -17,7 +17,7 @@
     const props = defineProps({
         expire:{
             type:Number,
-            default:120 // 分钟
+            default:120 // minute
         }
     })
 
@@ -26,7 +26,7 @@
 
     let timer = null
     const time_out = ref(0)
-    // 初始化倒计时
+    // Initialization countdown
     function initTimeBox(){
         if(timer){
             clearInterval(timer)
@@ -39,7 +39,7 @@
 
     const emit = defineEmits(["end"])
     function handleTimeOut(){
-        // 时间结束
+        // time's up
         if(time_out.value == 0){
             emit("end")
             return clearInterval(timer)

@@ -7,9 +7,9 @@
                     <LoadingSkeleton/>
                 </template>
                 <PlayerAudio v-if="data.type == 'audio'" :title="data.title" :url="data.content" :cover="data.cover"/>
-                <!-- 引入视频播放器 -->
+                <!-- Introducing the video player -->
                 <PlayerVideo v-else-if="data.type == 'video'" :url="data.content" />
-                <!-- 引入直播播放器 -->
+                <!-- Introducing the video player -->
                 <PlayerLive v-else-if="type == 'live'" :url="data.playUrl"/>
             </ClientOnly>
         </section>
@@ -34,7 +34,7 @@
                                 <Price :value="data.t_price" through class="ml-1 text-xs"/>
                             </div>
 
-                            <!-- 领取优惠券 -->
+                            <!-- Get coupons -->
                             <CouponModal v-if="type != 'live'"/>
                             <LiveStatusBar v-else :start="data.start_time" :end="data.end_time"/>
                         </template>
@@ -50,10 +50,10 @@
                             <n-button v-if="freeId"
                             strong secondary type="primary" class="ml-2" 
                             @click="learn({ id:freeId })">
-                                免费试看
+                                Free trial
                             </n-button>
                         </template>
-                        <n-button v-else type="primary" disabled>敬请期待</n-button>
+                        <n-button v-else type="primary" disabled>Stay tuned</n-button>
                     </template>
 
                     <n-button v-else type="primary" :loading="loading" @click="buy">
@@ -77,7 +77,7 @@
                         <DetailMenuItem v-for="(item,index) in menus"
                         :key="index" :item="item" :index="index" @click="learn(item)"/>
 
-                        <Empty v-if="menus.length == 0" desc="暂无目录"/>
+                        <Empty v-if="menus.length == 0" desc="No directory yet"/>
                     </DetailMenu>
 
                 </section>
@@ -107,7 +107,7 @@
         changeTab
     } = useInitDetailTabs(type)
 
-    // 获取请求参数
+    // Get request parameters
     const query = useRequestQuery()
 
     const {
@@ -117,14 +117,14 @@
         refresh
     } = await useReadDetailApi(type,query)
 
-    const title = computed(()=> !pending.value ? data.value?.title : "详情页")
+    const title = computed(()=> !pending.value ? data.value?.title : "Details page")
 
     useHead({ title })
     
     const o = {
-        media:"图文",
-        video:"视频",
-        audio:"音频"
+        media:"Graphics",
+        video:"Video",
+        audio:"Audio"
     }
 
     const subTitle = computed(()=>{
@@ -132,23 +132,23 @@
         if(type === "course"){
             pre = `【${o[data.value.type]}】`
         }
-        return `${pre}${data.value.sub_count}人学过`
+        return `${pre}${data.value.sub_count} People have learned`
     })
 
     const btn = computed(()=>{
         if(data.value.group){
-            return "立即拼团"
+            return "Buy now"
         } else if(data.value.flashsale){
-            return "立即秒杀"
+            return "Immediately buy"
         }
-        return "立即学习"
+        return "Learn now"
     })
 
-    // 购买学习
+    // Buy to learn
     const loading = ref(false)
     const buy = ()=>{
         useHasAuth(async ()=>{
-            // 免费学习
+            // Learn for free
             if(data.value.price == 0){
                 loading.value = true
                 let {
@@ -160,13 +160,13 @@
 
                 loading.value = false
 
-                // 请求成功，刷新数据
+                // Request successful, refresh data
                 if(!learnError.value) refresh()
 
                 return
             }
 
-            // 发起拼团
+            // Start a group buy
             if(data.value.group){
                 loading.value = true
                 useCreateOrderApi({
@@ -183,7 +183,7 @@
                 return
             }
 
-            // 付费学习
+            // Paid Learning
             let ty = "course"
             let id = data.value.id
             if(type == "book"){
@@ -204,18 +204,18 @@
         })
     }
 
-    // 菜单
+    // Paid Learning
     const menus = computed(()=> (type == 'book' ? data.value.book_details : data.value.column_courses ) || [])
 
-    // 点击菜单
+    // Click on the menu
     const learn = (item)=>{
         useHasAuth(()=>{
             const { message } = createDiscreteApi(["message"])
-            // 专栏
+            // Column
             if(type == "column" && item.price != 0 && !data.value.isbuy){
-                return message.error("请先购买该专栏")
+                return message.error("Please purchase this column first")
             }
-            // 跳转
+            // Jump
             let url = ""
             if(type == "column"){
                 url = `/detail/course/${item.id}?column_id=${data.value.id}`
@@ -226,7 +226,7 @@
         })
     }
 
-    // 电子书第一个免费章节ID
+    // First free chapter ID for e-book
     const freeId = computed(()=>{
         let fid = 0
         if(type == 'book' && data.value){
@@ -238,7 +238,7 @@
         return fid
     })
 
-    // 获取query
+    // Get query
     function useRequestQuery(){
         const {
             column_id,
@@ -262,17 +262,17 @@
         return query
     }
 
-    // 初始化tab
+    // Initialize tab
     function useInitDetailTabs(t){
         const tabs = computed(()=>{
             let ts = [{
-                label:"详情",
+                label:"Details",
                 value:"content"
             }]
 
             if(t == "column" || t == "book"){
                 ts.push({
-                    label:"目录",
+                    label:"Table of contents",
                     value:"menu"
                 })
             }
@@ -291,7 +291,7 @@
         }
     }
 
-    // 初始化head
+    // Initialize head
     function useInitHead(){
         if(type === "course"){
             useHead({

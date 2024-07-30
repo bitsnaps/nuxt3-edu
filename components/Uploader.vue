@@ -2,7 +2,7 @@
     <div style="width:100%;">
         <ClientOnly>
             <template #fallback>
-                <!-- 加载中 -->
+                <!-- loading -->
                 <div class="border rounded bg-gray-50 flex items-center justify-center"
                 style="width:94px;height:94px;">
                     <n-spin show />
@@ -50,7 +50,7 @@ const fileList = ref([])
 
 initFileList()
 
-// 上传成功
+// Upload Successfully
 const handleSuccess = (...e)=>{
     const { file,event } = e[0]
     const response = JSON.parse(event.target.response)
@@ -58,13 +58,13 @@ const handleSuccess = (...e)=>{
     return file
 }
 
-// 上传失败
+// upload failed
 const handleError = (e)=>{
     const { message } = createDiscreteApi(["message"])
-    message.error("上传失败")
+    message.error("Upload failed")
 }
 
-// 初始化filelist
+// Initialize filelist
 function initFileList(){
     if(typeof props.modelValue == "string"){
         fileList.value = props.modelValue ? [{
@@ -85,7 +85,7 @@ function initFileList(){
     }
 }
 
-// 监听fileList变化
+// Monitor fileList changes
 const stopWatch = watch(()=>fileList,(newVal)=>{
     updateModelValue()
 },{

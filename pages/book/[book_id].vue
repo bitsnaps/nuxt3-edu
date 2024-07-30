@@ -13,7 +13,7 @@
                         :key="index" :item="item" :index="index" @click="open(item.id)"
                         :active="activeId == item.id"/>
 
-                        <Empty v-if="data.menus.length == 0" desc="暂无目录"/>
+                        <Empty v-if="data.menus.length == 0" desc="No directory yet"/>
                     </DetailMenu>
                 </n-scrollbar>
             </n-grid-item>
@@ -58,7 +58,7 @@
         middleware(to,from){
             const { book_id } = to.params
             if(isNaN(+book_id)){
-                return abortNavigation("页面不存在")
+                return abortNavigation("Page does not exist")
             }
             return true
         }

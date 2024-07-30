@@ -13,7 +13,7 @@ import {
     NPagination
 } from "naive-ui"
 
-useHead({ title:"我的收藏" })
+useHead({ title:"My favorites" })
 
 const {
     page,

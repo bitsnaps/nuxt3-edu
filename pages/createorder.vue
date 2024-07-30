@@ -1,7 +1,7 @@
 <template>
     <LoadingGroup :pending="pending" :error="error">
         <n-card class="createorder">
-            <h4>产品信息</h4>
+            <h4>Product Information</h4>
             <div class="flex mb-5">
                 <n-image :src="data.cover"
                     class="rounded flex-shrink-0 " 
@@ -18,37 +18,37 @@
                     </div>
                 </div>
             </div>
-            <h4>优惠券</h4>
+            <h4>Coupons</h4>
             <n-grid :x-gap="20" :cols="4" class="mb-3">
                 <n-grid-item v-for="(item,index) in couponData.rows" :key="index">
                     <n-button strong secondary 
                     :type="user_coupon_id == item.id ? 'warning' : 'tertiary'"
                     @click="chooseCoupon(item)">
-                    ￥{{ item.price }} 优惠券
+                    ￥{{ item.price }} Coupon
                     </n-button>
                 </n-grid-item>
             </n-grid>
             <div v-if="couponData.count == 0" class="text-gray-400 text-sm mb-5">
-                暂无优惠券
+                No coupons available
             </div>
-            <h4>支付方式</h4>
+            <h4>Payment Method</h4>
             <div class="flex mb-5">
                 <span class="wxpay">
                     <n-icon>
                         <LogoWechat />
                     </n-icon>
-                    <b>微信支付</b>
+                    <b>WeChat Pay</b>
                 </span>
             </div>
 
             <div class="flex items-center mb-5">
-                <small class="text-red-500 mr-auto">请在30分钟内完成支付</small>
-                <span v-if="user_coupon_id">优惠券已抵扣 <b class="text-red-500">{{ coupon_price }}</b>元，</span>
-                需支付<Price :value="price" />
+                <small class="text-red-500 mr-auto">Please complete the payment within 30 minutes</small>
+                <span v-if="user_coupon_id">Coupon deduction <b class="text-red-500">{{ coupon_price }}</b> yuan，</span>
+                Amount to pay <Price :value="price" />
             </div>
 
             <div class="flex justify-end">
-                <n-button type="primary" @click="submit" :loading="loading">确认支付</n-button>
+                <n-button type="primary" @click="submit" :loading="loading">Confirm Payment</n-button>
             </div>
 
         </n-card>
@@ -69,50 +69,50 @@ import {
 } from "@vicons/ionicons5"
 
 const t = {
-    media:"图文",
-    audio:"音频",
-    video:"视频",
-    column:"专栏",
-    book:"电子书",
-    course:"课程"
+    media:"Text and Image",
+    audio:"Audio",
+    video:"Video",
+    column:"Column",
+    book:"E-book",
+    course:"Course"
 }
 
 const route = useRoute()
 const { id, type } = route.query
 
-// 获取产品信息
+// Get product information
 const {
     data,
     pending,
     error
 } = await useGetGoodsInfoApi(id, type)
 
-// 获取可用优惠券
+// Get available coupons
 const {
     data: couponData
 } = await useGetUseableUserCouponApi(id, type)
 
-// 选中优惠券
+// Select coupon
 const user_coupon_id = ref(0)
 const chooseCoupon = (item)=>{
     user_coupon_id.value = user_coupon_id.value == item.id ? 0 : item.id
 }
 
-// 优惠券价格
+// Coupon price
 const coupon_price = computed(()=>{
     if(user_coupon_id.value == 0) return 0
     let c = couponData.value.rows.find(o=>o.id == user_coupon_id.value)
     return c ? c.price : 0
 })
 
-// 最终价格
+// Final price
 const price = computed(()=>{
     let p = ((data.value.price * 1000 - coupon_price.value * 1000) / 1000).toFixed(2)
     return p <= 0 ? 0 : p
 })
 
 
-// 创建订单并发起支付
+// Create order and initiate payment
 const loading = ref(false)
 async function submit(){
     loading.value = true

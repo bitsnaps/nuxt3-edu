@@ -14,13 +14,13 @@ function useGetFetchOptions(options = {}) {
   options.initialCache = options.initialCache ?? false;
   options.lazy = options.lazy ?? false;
 
-  // 用户登录，默认传token
+  // User login, default token
   const token = useCookie("token");
   if (token.value) {
     options.headers.token = token.value;
   }
 
-  // 禁止响应式
+  // Disable responsiveness
   if (options.body) {
     const rawBody = toRaw(options.body);
     options.body = typeof rawBody === "object" ? { ...rawBody } : rawBody;
@@ -46,7 +46,7 @@ export async function useHttp(key, url, options = {}) {
       const msg = err?.data?.data;
       if (process.client) {
         const { message } = createDiscreteApi(["message"]);
-        message.error(msg || "服务端错误");
+        message.error(msg || "Server Error");
       }
       error.value = msg;
       return {
@@ -58,31 +58,31 @@ export async function useHttp(key, url, options = {}) {
 
   let res = await useFetch(url, {
     ...options,
-    // 相当于响应拦截器
+    // Equivalent to a response interceptor
     transform: (res) => {
       return res.data;
     },
   });
 
-  // 客户端错误处理
+  // Client Error Handling
   if (process.client && res.error.value) {
     const msg = res.error.value?.data?.data;
     if (!options.lazy) {
       const { message } = createDiscreteApi(["message"]);
-      message.error(msg || "服务端错误");
+      message.error(msg || "Server Error");
     }
   }
 
   return res;
 }
 
-// GET请求
+// GET request
 export function useHttpGet(key, url, options = {}) {
   options.method = "GET";
   return useHttp(key, url, options);
 }
 
-// POST请求
+// POST request
 export function useHttpPost(key, url, options = {}) {
   options.method = "POST";
   return useHttp(key, url, options);

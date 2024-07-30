@@ -19,7 +19,7 @@ import {
     NPagination
 } from "naive-ui"
 
-useHead({ title:"优惠券记录" })
+useHead({ title:"Coupon Record" })
 
 const {
     page,

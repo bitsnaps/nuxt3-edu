@@ -13,15 +13,15 @@
         pending
     } = await useBookDetailApi(book_id,id)
 
-    // 修改页面标题
-    const title = computed(()=>data.value ? data.value.title : "电子书详情页")
+    // Modify the page title
+    const title = computed(()=>data.value ? data.value.title : "E-book details page")
     useHead({ title })
 
     definePageMeta({
         middleware(to,from){
             const { id } = to.params
             if(isNaN(+id)){
-                return abortNavigation("页面不存在")
+                return abortNavigation("Page does not exist")
             }
             return true
         }

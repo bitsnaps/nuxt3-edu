@@ -2,12 +2,12 @@ import { createDiscreteApi } from "naive-ui";
 
 export const useUser = () => useState("user", () => null);
 
-// 更新用户信息
+// Update User Information
 export async function useRefreshUserInfo(enforce = true) {
   const token = useCookie("token");
   const user = useUser();
-  // 用户已登录，直接获取用户信息
-  // 2024-1-5 添加 user.value === null 和 enforce 控制，防止重复请求
+  // The user has logged in, directly obtain user information
+  // 2024-1-5 Add user.value === null and enforce controls to prevent duplicate requests
   if (token.value && (user.value === null || enforce)) {
     let {
       data,
@@ -20,7 +20,7 @@ export async function useRefreshUserInfo(enforce = true) {
   }
 }
 
-// 退出登录
+// sign out
 export async function useLogout() {
   await useLogoutApi();
   const user = useUser();
@@ -28,30 +28,30 @@ export async function useLogout() {
   const token = useCookie("token");
   token.value = null;
   const { message } = createDiscreteApi(["message"]);
-  message.success("退出登录成功");
-  // 回到首页
+  message.success("Logout successful");
+  // back to the homepage
   const route = useRoute();
   if (route.path != "/") {
     navigateTo("/", { replace: true });
   }
 }
 
-// 登录并且绑定手机号之后才能操作
+// You can only operate after logging in and binding your mobile phone number
 export function useHasAuth(callback = null) {
   const route = useRoute();
   const token = useCookie("token");
   const user = useUser();
   const { message } = createDiscreteApi(["message"]);
-  // 未登录
+  // Not logged in
   if (!token.value) {
-    message.error("请先登录");
+    message.error("please log in first");
     return navigateTo("/login?from=" + route.fullPath);
   }
 
-  // 未绑定手机号
+  // No mobile phone number bound
   const phone = user.value?.phone;
   if (!phone && route.name != "bindphone") {
-    message.error("请先绑定手机号");
+    message.error("Please bind your mobile number first");
     return navigateTo("/bindphone?from=" + route.fullPath);
   }
 
@@ -60,15 +60,15 @@ export function useHasAuth(callback = null) {
   }
 }
 
-// 点赞/取消点赞
+// Like/Unlike
 export function useHandleSupportPost() {
   const supportLoading = ref(false);
-  // 点赞/取消点赞
+  // Like/Unlike
   const handleSupport = (item) => {
     useHasAuth(async () => {
-      // 行为判断
+      // Behavioral judgment
       let type = item.issupport ? "unsupport" : "support";
-      let msg = item.issupport ? "取消点赞" : "点赞";
+      let msg = item.issupport ? "Cancel Like" : "Like";
 
       supportLoading.value = true;
 
@@ -78,10 +78,10 @@ export function useHandleSupportPost() {
 
       supportLoading.value = false;
 
-      // 操作失败，直接返回
+      // The operation failed, return directly
       if (error.value) return;
 
-      // 点赞数 +1/-1
+      // Likes +1/-1
       if (type === "unsupport") {
         item.support_count--;
       } else {
@@ -91,7 +91,7 @@ export function useHandleSupportPost() {
       item.issupport = !item.issupport;
 
       const { message } = createDiscreteApi(["message"]);
-      message.success(msg + "成功");
+      message.success(msg + "success");
     });
   };
 

@@ -2,32 +2,32 @@
     <div class="flex justify-center">
         <n-card class="w-[450px] mb-10">
             <ClientOnly>
-                <n-alert v-if="ispay" title="支付成功" type="success" class="mb-2">
-                    正在跳转...
+                <n-alert v-if="ispay" title="payment successful" type="success" class="mb-2">
+                    Redirecting...
                 </n-alert>
-                <n-alert v-else-if="isTimeOut" title="支付已超时" type="error" class="mb-2">
-                    请刷新页面重新支付
+                <n-alert v-else-if="isTimeOut" title="Payment timed out" type="error" class="mb-2">
+                    Please refresh the page and pay again
                 </n-alert>
-                <h4 class="text-xl mb-2">微信支付</h4>
+                <h4 class="text-xl mb-2">WeChat Pay</h4>
                 <p class="text-sm text-gray-500 flex">
-                    距离二维码过期还剩 <TimeBox 
+                    The QR code will expire in <TimeBox 
                     class="text-rose-500" 
                     :expire="30" 
-                    @end="handleTimeOut"/> ，过期后请刷新页面重新获取
+                    @end="handleTimeOut"/> Please refresh the page to get it again after expiration.
                 </p>
                 <h5 class="flex justify-center py-5">
-                    支付总额：
+                    Total payment:
                     <Price :value="data.price"/>
                 </h5>
-                <!-- 二维码组件 -->
+                <!-- QR code component -->
                 <QrCode :data="data.code_url" v-if="data.code_url"/>
                 <div class="flex justify-center items-center py-4 text-green-500">
                     <n-icon :size="35">
                         <ScanCircleOutline/>
                     </n-icon>
                     <div class="ml-3 text-gray-500 text-sm">
-                        <p>请使用微信扫一扫</p>
-                        <p>扫描二维码支付</p>
+                        <p>Please scan using WeChat</p>
+                        <p>Scan QR code to pay</p>
                     </div>
                 </div>
             </ClientOnly>
@@ -45,7 +45,7 @@
         ScanCircleOutline
     } from "@vicons/ionicons5"
 
-    // // 模拟响应结果
+    // // Simulation response results
     // const data = {
     //     "price": "10.00", 
     //     "code_url": "weixin://wxpay/bizpayurl?pr=QdPmZtyzz" 
@@ -54,19 +54,19 @@
     const route = useRoute()
     const { no } = route.query
 
-    // 发起微信PC支付
+    // Initiate WeChat PC payment
     const {
         data,
         error
     } = await useWxpayApi(no)
 
-    // 支付超时
+    // Payment timeout
     const isTimeOut = ref(false)
     function handleTimeOut(){
         isTimeOut.value = true
     }
 
-    // 开始轮询订单状态
+    // Start polling order status
     const ispay = ref(false)
     const timer = ref(null)
     function checkIspay(){
@@ -84,7 +84,7 @@
         checkIspay()
     }
 
-// 支付成功处理
+// Payment successfully processed
 function handleSuccess(){
     ispay.value = true
     if(timer.value) clearInterval(timer.value)

@@ -6,13 +6,13 @@
                     <h3 class="text-center font-bold">{{ data.title }}</h3>
                     <n-divider />
                     <p class=" space-x-5 text-sm text-center">
-                        <span>题目总数：{{ data.testpaper_questions.length }}</span>
-                        <span>总分数：{{ data.total_score }}</span>
-                        <span>时间：{{ data.expire }}分钟</span>
+                        <span>Total number of questions:{{ data.testpaper_questions.length }}</span>
+                        <span>Total score:{{ data.total_score }}</span>
+                        <span>Time:{{ data.expire }}minute</span>
                     </p>
                 </template>
 
-                <!-- 题目组件 -->
+                <!-- Title Components -->
                 <PaperTestItem v-for="(item,index) in testpaper_questions" :key="index" :item="item" :index="index"
                 @change="handleUserValueChange(item,$event)"
                 :id="'question_'+index"/>
@@ -59,7 +59,7 @@ let {
     data
 } = await useReadTestpaperApi(route.params.id)
 
-// 题目列表
+// List of topics
 const testpaper_questions = computed(()=>{
     return data.value ? data.value.testpaper_questions.map(o=>{
         o.isTest = false
@@ -67,25 +67,25 @@ const testpaper_questions = computed(()=>{
     }) : []
 })
 
-// 监听题目值变化
+// Monitor title value changes
 function handleUserValueChange(item,val){
     item.user_value = val
     updateIsTest()
 }
 
-// 检查题目是否填写
+// Check if the title is filled in
 function updateIsTest(){
     testpaper_questions.value.forEach(item=>{
         let t = false
-        // 问答和填空
+        // Questions and answers and fill-in-the-blanks
         if(item.type == 'answer' || item.type == 'completion'){
             t = !!item.user_value[0]
         }
-        // 单选
+        // Single Choice
         else if(item.type == 'radio' || item.type == 'trueOrfalse'){
             t = item.user_value != -1
         }
-        // 多选
+        // Multiple Selection
         else {
             t = item.user_value.length > 0
         }
@@ -94,13 +94,13 @@ function updateIsTest(){
     })
 }
 
-// 滚动到指定位置
+// Scroll to the specified position
 function scrollToDom(index){
     const dom = document.getElementById("question_"+index)
     window.scrollTo(0,dom.offsetTop)
 }
 
-// 阻止切换其他页面
+// Prevent switching to other pages
 const disableBack = ref(true)
 onBeforeRouteLeave((to,from,next)=>{
     if(!disableBack.value){
@@ -108,9 +108,9 @@ onBeforeRouteLeave((to,from,next)=>{
     } else {
         const { dialog } = createDiscreteApi(["dialog"])
         dialog.warning({
-            content:"是否要放弃考试？",
-            positiveText:"确定",
-            negativeText:"取消",
+            content:"Do you want to give up the exam?",
+            positiveText:"OK",
+            negativeText:"Cancel",
             onPositiveClick(){
                 disableBack.value = false
                 navigateTo(to.fullPath || '/' ,{ replace:true })
@@ -127,7 +127,7 @@ async function submit(){
     const { message } = createDiscreteApi(["message"])
     let l = (testpaper_questions.value.filter(v=>!v.isTest)).length
     if(l > 0){
-        return message.warning("还有题目没有完成，请检查")
+        return message.warning("There are still some questions that have not been completed, please check")
     }
 
     loading.value = true
@@ -144,9 +144,9 @@ async function submit(){
 
     if(submitError.value) return
 
-    // 跳转之前先把disableBack设为false
+    // Set disableBack to false before jumping
     disableBack.value = false
-    message.success("交卷成功")
+    message.success("Successfully submitted")
     navigateTo("/paper/1",{ replace:true })
 
 }
@@ -155,8 +155,8 @@ async function submit(){
 function autoSubmit(){
     const { dialog } = createDiscreteApi(["dialog"])
     dialog.success({
-        content:"考试时间到，试卷已强制提交",
-        positiveText:"确认",
+        content:"The exam time is up and the test paper has been submitted compulsorily",
+        positiveText:"confirm",
         closable:false,
         onPositiveClick(){
             disableBack.value = false

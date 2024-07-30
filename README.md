@@ -45,5 +45,5 @@ information.
 
 
 ## Notes
-下载Dev分支代码即可正常运行，main分支是beta版。
-建议使用Node-18.20.3 LTS版本。
+Download the Dev branch code to run normally. The main branch is the beta version.
+It is recommended to use the Node-18.20.3 LTS version.

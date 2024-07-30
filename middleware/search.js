@@ -3,10 +3,10 @@ export default defineNuxtRouteMiddleware((to, from) => {
   const { keyword } = to.query;
 
   if (!keyword) {
-    return abortNavigation("搜索关键词不能为空");
+    return abortNavigation("Search keyword cannot be empty");
   }
 
   if (!(["course", "column"].includes(type)) || isNaN(+page)) {
-    return abortNavigation("页面不存在");
+    return abortNavigation("Page does not exist");
   }
 });

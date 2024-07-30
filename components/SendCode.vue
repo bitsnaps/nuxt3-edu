@@ -16,15 +16,15 @@ const loading = ref(false)
 
 const text = computed(()=>{
     if(loading.value){
-        return "发送中..."
+        return "Sending..."
     }
     if(time.value > 0){
         return `${time.value} s`
     }
-    return "发送验证码"
+    return "Send the verification code"
 })
 
-// 发送验证码
+// Send the verification code
 const send = async ()=>{
     loading.value = true
 
@@ -46,7 +46,7 @@ const send = async ()=>{
         }
     }, 1000);
 
-    const msg = data.value == "ok" ? "发送成功" : `当前是演示模式，你的验证码是:${data.value}`
+    const msg = data.value == "ok" ? "Sent successfully" : `Currently in demo mode, your verification code is:${data.value}`
     const { message } = createDiscreteApi(["message"])
     message.success(msg)
 }

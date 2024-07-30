@@ -1,6 +1,6 @@
 <template>
   <LoadingGroup :pending="pending" :error="error">
-    <template v-for="(item, index) in data" :key="index">
+    <div v-for="(item, index) in data" :key="index">
       <Banner :data="item.data" v-if="item.type == 'swiper'" />
       <ImageNav :data="item.data" v-else-if="item.type == 'icons'" />
       <ImageAd :data="item.data" v-else-if="item.type == 'imageAd'" />
@@ -15,24 +15,24 @@
         :data="item.data"
         v-else-if="item.type == 'promotion'"
       />
-    </template>
+    </div>
   </LoadingGroup>
 </template>
 <script setup>
 useHead({
-  title: "帝莎编程首页",
+  title: "Disha Programming Home",
   meta: [
-    { name: "description", content: "首页描述" },
-    { name: "keywords", content: "首页关键词" },
+    { name: "description", content: "Home page description" },
+    { name: "keywords", content: "Home Keywords" },
   ],
 })
 
 const { pending, data, refresh, error } = await useIndexDataApi()
 
-// 服务端时直接报错
+// Direct error reporting on the server
 if (process.server && error.value) {
   // throwError(error.value?.data?.data)
-  // >=3.0.0 使用 throw createError 代替 throwError
+  // >=3.0.0 use throw createError alternative throwError
   throw createError(error.value)
 }
 </script>

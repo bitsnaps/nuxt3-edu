@@ -18,7 +18,7 @@
             </n-grid-item>
             <n-grid-item :span="6">
                 <NuxtLink to="/post/add">
-                    <n-button type="primary" class="mb-5 w-full">发布帖子</n-button>
+                    <n-button type="primary" class="mb-5 w-full">Post a message</n-button>
                 </NuxtLink>
                 <HotCourseList/>
             </n-grid-item>
@@ -81,11 +81,11 @@ definePageMeta({
         } = to.params
         if(!isNaN(+bbs_id) && !isNaN(+page)){
             useHead({
-                title:"社区问答列表"
+                title:"Community Q&A List"
             })
             return true
         }
-        return abortNavigation("页面不存在")
+        return abortNavigation("Page does not exist")
     }
 })
 </script>

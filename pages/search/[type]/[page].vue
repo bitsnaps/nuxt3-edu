@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5 class="text-lg my-3">"{{ title }}"的搜索相关结果</h5>
+        <h5 class="text-lg my-3">"{{ title }}"Search results for</h5>
         <UiTab>
             <UiTabItem :active="type === item.value" v-for="(item,index) in tabs" :key="index" @click="handleClick(item.value)">{{ item.label }}</UiTabItem>
         </UiTab>
@@ -33,10 +33,10 @@ const type = ref(route.params.type)
 useHead({ title })
 
 const tabs = [{
-    label:"课程",
+    label:"Course",
     value:"course"
 },{
-    label:"专栏",
+    label:"Column",
     value:"column"
 }]
 

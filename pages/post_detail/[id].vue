@@ -2,10 +2,10 @@
     <div>
         <n-breadcrumb class="mb-3">
             <n-breadcrumb-item>
-                <NuxtLink to="/">首页</NuxtLink>
+                <NuxtLink to="/">Home</NuxtLink>
             </n-breadcrumb-item>
             <n-breadcrumb-item>
-                <NuxtLink to="/bbs/0/1">社区列表</NuxtLink>
+                <NuxtLink to="/bbs/0/1">Community List</NuxtLink>
             </n-breadcrumb-item>
             <n-breadcrumb-item>{{ title }}</n-breadcrumb-item>
         </n-breadcrumb>
@@ -18,9 +18,9 @@
                             <n-avatar :size="40" :src="data.user.avatar"></n-avatar>
                             <div class="ml-2 flex-1">
                                 <h4>{{ data.user.name }}</h4>
-                                <small class="text-gray-500">发布时间：{{ data.created_time }}</small>
+                                <small class="text-gray-500">Release date:{{ data.created_time }}</small>
                             </div>
-                            <n-tag size="small" type="success" :bordered="false" v-if="data.is_top">置顶</n-tag>
+                            <n-tag size="small" type="success" :bordered="false" v-if="data.is_top">Sticky</n-tag>
                         </div>
 
                         <n-divider/>
@@ -44,7 +44,7 @@
                                 <template #icon>
                                     <n-icon><ThumbsUpSharp /></n-icon>
                                 </template>
-                                点赞 {{ data.support_count || '' }}
+                                like {{ data.support_count || '' }}
                             </n-button>
                         </div>
 
@@ -60,7 +60,7 @@
             </n-grid-item>
             <n-grid-item :span="6">
                 <NuxtLink to="/post/add">
-                    <n-button type="primary" class="mb-5 w-full">发布帖子</n-button>
+                    <n-button type="primary" class="mb-5 w-full">Post a message</n-button>
                 </NuxtLink>
                 <HotCourseList/>
             </n-grid-item>
@@ -99,7 +99,7 @@
     
     const title = computed(()=>{
         if(pending.value){
-            return "帖子详情"
+            return "Post Details"
         }
         let t = data.value?.desc?.text
         if(t && t.length >= 10){
@@ -116,7 +116,7 @@
         handleSupport
     } = useHandleSupportPost()
 
-    // 评论成功
+    // Comment Success
     const CommentRef = ref(null)
     function handleCommentSuccess(){
         CommentRef.value.handlePageChange(1)

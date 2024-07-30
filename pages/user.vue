@@ -27,31 +27,31 @@ const pageKey = computed(()=>route.fullPath)
 const activeName = computed(()=>route.name)
 
 const menus = [{
-    title:"学习记录",
+    title:"Learning Record",
     name:"user-history-page"
 },{
-    title:"购买记录",
+    title:"Purchase History",
     name:"user-buy-page"
 },{
     title:"我的考试",
     name:"user-test-page"
 },{
-    title:"我的帖子",
+    title:"My posts",
     name:"user-post-page"
 },{
-    title:"优惠券记录",
+    title:"Coupon Record",
     name:"user-coupon-page"
 },{
     title:"我的收藏",
     name:"user-fava-page"
 },{
-    title:"修改资料",
+    title:"Modify information",
     name:"user-edit"
 },{
-    title:"修改密码",
+    title:"Change Password",
     name:"user-password"
 },{
-    title:"其他设置",
+    title:"Other settings",
     name:"user-other"
 }]
 

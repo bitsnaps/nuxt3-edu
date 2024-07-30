@@ -1,11 +1,10 @@
 <template>
     <div class="p-5">
-        <p class="text-sm text-gray-500">其他设置</p>
+        <p class="text-sm text-gray-500">Other settings</p>
         <div class="flex py-5 border-b">
-            手机号：{{ user.phone }}
+            Phone number: {{ user.phone }}
             <n-button quaternary type="primary" size="small" class="ml-auto" @click="goToBindPhone">
-                修改
-            </n-button>
+                Modify            </n-button>
         </div>
     </div>
 </template>

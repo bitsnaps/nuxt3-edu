@@ -1,7 +1,7 @@
 <template>
     <div class="border-b p-5">
        <div class="cursor-pointer text-gray-600" @click="open">
-          <n-tag v-if="item.is_top" :bordered="false" type="success" size="small">置顶</n-tag>
+          <n-tag v-if="item.is_top" :bordered="false" type="success" size="small">Sticky</n-tag>
           {{ item.desc.text }}
        </div>
        <div class="mt-3 cursor-pointer" style="max-width:500px;" @click="open">
@@ -19,18 +19,18 @@
                 <template #icon>
                     <n-icon><ThumbsUpSharp /></n-icon>
                 </template>
-                点赞 {{ item.support_count || '' }}
+                Like {{ item.support_count || '' }}
             </n-button>
 
             <n-button secondary strong size="tiny" class="mr-3">
                 <template #icon>
                     <n-icon><ChatboxEllipsesOutline /></n-icon>
                 </template>
-                评论 {{ item.comment_count || '' }}
+                Comment(s) {{ item.comment_count || '' }}
             </n-button>
-            <n-button text size="tiny" class="mr-3">作者：{{ item.user.name }}</n-button>
+            <n-button text size="tiny" class="mr-3">author:{{ item.user.name }}</n-button>
             <n-button v-if="showDel" type="error" size="tiny" class="mr-3" @click="deleteItem" :loading="loading">
-                删除
+                Delete
             </n-button>
        </div>
     </div>
@@ -66,15 +66,15 @@ const loading = ref(false)
 const deleteItem = ()=>{
     const { dialog,message } = createDiscreteApi(["dialog","message"])
     dialog.warning({
-        content: "是否要删除该帖子？",
-        positiveText: "确定",
-        negativeText: "取消",
+        content: "Do you want to delete this post?",
+        positiveText: "OK",
+        negativeText: "Cancel",
         onPositiveClick: async () => {
             loading.value = true
             emit("delete",{
                 id:props.item.id,
                 success(){
-                    message.success('删除成功')
+                    message.success('Successfully deleted')
                     loading.value = false
                 },
                 fail(){
